@@ -1,0 +1,624 @@
+/* 1) Variáveis de Tema */
+/* 1) Esconde o logo e centraliza apenas o menu */
+.header-inner {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+}
+.logo {
+  display: none !important;
+}
+
+/* 2) Ajusta o nav-list para ficar bem no meio */
+.nav-list {
+  gap: 2rem;
+}
+.nav-list a {
+  padding: 0.5rem 1rem;
+}
+
+/* 3) Centraliza e redimensiona as skills */
+.skills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  justify-items: center;
+  gap: 1.5rem;
+}
+.skill-card i {
+  font-size: 2.5rem !important;
+}
+
+/* 4) Garante que o quarto projeto “Cidade Inteligente” fique ao lado */
+.project-center {
+  grid-column: auto !important;
+}
+:root {
+  --bg: #0e0e0e;
+  --bg-alt: #1a1a1a;
+  --fg: #f5f5f5;
+  --muted: #777;
+  --accent: #888;
+  --accent-light: #bbb;
+  --font-base: 'Roboto', sans-serif;
+  --font-heading: 'Orbitron', sans-serif;
+  --max-w: 1200px;
+  --gap-xs: 0.5rem;
+  --gap-sm: 1rem;
+  --gap-md: 2rem;
+  --gap-lg: 3rem;
+  --transition: 0.3s ease;
+  --perspective: 1000px;
+}
+
+/* 2) Reset Geral */
+*, *::before, *::after {
+  margin:0; padding:0; box-sizing:border-box;
+}
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-base);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a { color:inherit; text-decoration:none; }
+ul { list-style:none; }
+img { display:block; max-width:100%; }
+
+/* 3) Container */
+.container {
+  width:90%; max-width:var(--max-w); margin:0 auto; padding:var(--gap-md) 0;
+}
+/* 4) Header */
+.header {
+  position:fixed; top:0; left:0; width:100%;
+  background:rgba(14,14,14,0.95); backdrop-filter:blur(6px);
+  z-index:1000;
+}
+.header-inner {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--gap-sm) 0;
+}
+.logo {
+  font-family:var(--font-heading); font-size:1.8rem;
+  color:var(--fg); transition:color var(--transition);
+}
+.logo:hover { color:var(--accent-light); }
+.nav-list {
+  display:flex; gap:var(--gap-lg);
+}
+.nav-list a {
+  position:relative; padding:var(--gap-sm);
+  font-weight:500; transition:color var(--transition);
+}
+.nav-list a::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:0; height:2px; background:var(--accent-light);
+  transition:width var(--transition);
+}
+.nav-list a:hover { color:var(--accent-light); }
+.nav-list a:hover::after { width:100%; }
+
+/* Garante espaço para o main */
+main { padding-top: calc(var(--gap-lg)+var(--gap-sm)); }
+
+/* 5) Hero */
+.hero {
+  display:flex; align-items:center; justify-content:center;
+  height:100vh; perspective:var(--perspective);
+  background:var(--bg-alt); overflow:hidden;
+}
+.hero-inner {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:var(--gap-lg); text-align:center; padding:0 var(--gap-sm);
+}
+.hero-text h1 {
+  font-family:var(--font-heading); font-size:3rem;
+  margin-bottom:var(--gap-sm);
+  white-space:nowrap; overflow:hidden;
+  border-right:2px solid var(--accent);
+  animation:typing 3s steps(30) forwards;
+}
+@keyframes typing {
+  from { width:0; } to { width:100%; }
+}
+.hero-text p {
+  color:var(--muted); margin-bottom:var(--gap-lg);
+}
+.hero-scroll {
+  font-size:2rem; color:var(--accent);
+  animation:bounce 2s infinite;
+}
+@keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
+.hero-image img {
+  width:260px; height:260px;
+  border-radius:50%; border:4px solid var(--accent);
+  object-fit:cover;
+}
+
+/* ——— efeito de zoom no hover ——— */
+.hero-image {
+  overflow: hidden;           /* esconde o excesso quando o img cresce */
+  display: inline-block;      /* respeita o tamanho do container */
+  border-radius: 50%;         /* mantém o container circular */
+}
+.hero-image img {
+  transition: transform var(--transition); /* adiciona transição suave usando sua variável de tema */
+}
+.hero-image:hover img {
+  transform: scale(1.1);
+}
+
+/* 6) Skills */
+.skills {
+  padding:var(--gap-lg) 0; background:var(--bg);
+}
+.skills-inner h2 {
+  font-family:var(--font-heading); font-size:2rem;
+  text-align:center; margin-bottom:var(--gap-md);
+}
+.skills-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:var(--gap-md); justify-items:center;
+}
+.skill-card {
+  display:flex; flex-direction:column; align-items:center;
+  transition:transform var(--transition);
+}
+.skill-card i {
+  font-size:3rem; color:var(--accent); margin-bottom:var(--gap-xs);
+}
+.skill-card span {
+  color:var(--fg); font-size:0.9rem;
+}
+.skill-card:hover { transform:translateY(-5px); }
+
+/* 7) Projetos */
+.portfolio {
+  padding:var(--gap-lg) 0; background:var(--bg-alt);
+}
+.portfolio-inner h2 {
+  font-family:var(--font-heading); font-size:2.5rem;
+  text-align:center; margin-bottom:var(--gap-md);
+}
+.projects-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:var(--gap-md);
+}
+.project-card {
+  background:var(--bg); border:2px solid var(--muted);
+  border-radius:8px; padding:var(--gap-md);
+  transition:border-color var(--transition),transform var(--transition);
+}
+.project-card h3 {
+  color:var(--fg); margin-bottom:var(--gap-xs);
+}
+.project-card p {
+  color:var(--muted); margin-bottom:var(--gap-sm);
+}
+.project-card a {
+  color:var(--accent); font-weight:600;
+}
+.project-card:hover {
+  border-color:var(--accent); transform:translateY(-5px);
+}
+.project-center { grid-column:1/-1; }
+
+/* 8) Contato */
+.contato {
+  padding:var(--gap-lg) 0; background:var(--bg);
+}
+.contato-inner h2 {
+  font-family:var(--font-heading); font-size:2rem;
+  text-align:center; margin-bottom:var(--gap-md);
+}
+.contact-list {
+  display:flex; justify-content:center; gap:var(--gap-md);
+}
+.contact-list a {
+  display:flex; flex-direction:column; align-items:center;
+  color:var(--fg); font-size:0.9rem;
+  transition:color var(--transition),transform var(--transition);
+}
+.contact-list a i {
+  font-size:2rem; margin-bottom:var(--gap-xs);
+}
+.contact-list a:hover { color:var(--accent); transform:scale(1.2); }
+
+/* 9) Footer */
+.footer-inner {
+  background:var(--bg-alt); padding:var(--gap-md) 0;
+  text-align:center;
+}
+.footer-inner p { color:var(--muted); font-size:0.9rem; }
+
+/* 10) Responsividade */
+@media (max-width:768px) {
+  .header-inner { flex-direction:column; gap:var(--gap-sm); }
+  .hero-inner { flex-direction:column; gap:var(--gap-md); }
+  .skills-grid { grid-template-columns:repeat(auto-fit,minmax(80px,1fr)); }
+  .projects-grid { grid-template-columns:1fr; }
+}
+
+/* ==== Unified Headings & Sizing ==== */
+section#skills h2,
+section#portfolio h2,
+section#contato h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+.skills-grid .skill-card,
+.projects-grid .project-card,
+.contact-list a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  text-align: center;
+}
+
+/* 12) Efeito de background girando suavemente */
+:root {
+  --rotation-duration: 60s;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-light),
+    var(--accent),
+    var(--accent-light),
+    var(--accent)
+  );
+  filter: blur(150px);
+  opacity: 0.3;
+  animation: rotateBg var(--rotation-duration) linear infinite;
+  z-index: 0;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes rotateBg {
+  to { transform: rotate(360deg); }
+}
+.portfolio {
+  position: relative;
+  overflow: hidden;
+  /* mantém o padding e background originais */
+  padding: var(--gap-lg) 0;
+  background: var(--bg-alt);
+}
+.portfolio::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-light),
+    var(--accent),
+    var(--accent-light),
+    var(--accent)
+  );
+  filter: blur(150px);
+  opacity: 0.3;
+  animation: rotateBg var(--rotation-duration) linear infinite;
+  z-index: 0;
+}
+.portfolio-inner {
+  position: relative;
+  z-index: 1;
+}
+.contact-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  transition: transform var(--transition);
+}
+.contact-list a:hover .contact-icon {
+  transform: scale(1.2);
+}
+
+/* tamanho das sections */
+section#skills h2,
+section#portfolio h2,
+section#contato h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+.skills-grid .skill-card,
+.projects-grid .project-card,
+.contact-list a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  text-align: center;
+}
+
+/* contato dos ícones */
+.contact-list a img,
+.contact-list a i {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  transition: transform var(--transition);
+}
+.contact-list a:hover img,
+.contact-list a:hover i {
+  transform: scale(1.1);
+}
+
+/* Força tamanho uniforme nos ícones de contato */
+.contact-list a img,
+.contact-list a i {
+  width: 64px !important;
+  height: 64px !important;
+  margin: 0 auto 0.5rem;
+  display: block;
+  object-fit: contain;
+}
+
+/* Ajuste do <span> abaixo do ícone */
+.contact-list a span {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+/* Certifica que o wrapper tenha tamanho fixo igual aos cards */
+.contact-list a {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+section#skills h2,
+section#portfolio h2,
+section#contato h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.skills-grid .skill-card,
+.projects-grid .project-card,
+.contact-list a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  text-align: center;
+}
+/* ================================
+   Ajustes Gerais de Layout
+   ================================ */
+
+/* 1) Esconde o logo e centraliza apenas o menu */
+.header-inner {
+  justify-content: center !important;
+}
+.logo {
+  display: none !important;
+}
+
+/* 2) Menu */
+.nav-list {
+  gap: 2rem;
+  padding: 0;
+}
+.nav-list li a {
+  padding: 0.5rem 1rem;
+}
+
+/* 3) Containers com tamanho fixo e centralizados */
+.skills-grid .skill-card,
+.projects-grid .project-card,
+.contact-list a {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 4) Ajusta ícones/gráficos dentro */
+.skills-grid .skill-card i,
+.contact-list a i {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s;
+}
+.skills-grid .skill-card:hover i,
+.contact-list a:hover i {
+  transform: scale(1.1);
+}
+
+/* 5) Títulos uniformes */
+section#skills h2,
+section#portfolio h2,
+section#contato h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* 6) Espaçamento interno para os cards */
+.skills-grid .skill-card,
+.projects-grid .project-card,
+.contact-list a {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* 7) Garante que o projeto volte ao grid normal */
+.project-center {
+  grid-column: auto !important;
+}
+
+/* Responsividade: mantém tudo centralizado em telas menores */
+@media (max-width: 768px) {
+  .skills-grid .skill-card,
+  .projects-grid .project-card,
+  .contact-list a {
+    width: 160px;
+    height: 160px;
+  }
+}
+/* ====== Rodapé ====== */
+.footer {
+  width: 100vw;                /* cobertura total da viewport */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;          /* centraliza full-bleed */
+  margin-right: -50vw;
+  background: rgba(20,20,20,0.9);
+  padding: 1rem 0;
+}
+.footer-inner {
+  max-width: 1200px;           /* mantém o conteúdo alinhado */
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-inner p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   Footer Animado e Gradient Sweep
+   ======================================== */
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-alt);
+  animation: fadeUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+/* Sweep de gradiente */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 0%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0.05) 100%
+  );
+  animation: sweep 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Traz o conteúdo do footer para frente */
+.footer-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Efeito de fade-in vindo de baixo */
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animação de varredura do gradiente */
+@keyframes sweep {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+/* ===================================
+   Skills & Ferramentas 
+   =================================== */
+.skills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 2rem !important;
+  justify-items: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px !important;
+  height: 120px !important;
+  transition: transform 0.3s ease;
+}
+
+.skill-card i,
+.skill-card img {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.skill-card span {
+  color: var(--fg);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ===================================
+   Responsivo para Skills
+   =================================== */
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+  .skill-card {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .skill-card i,
+  .skill-card img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+/* Esse foi o css! */
